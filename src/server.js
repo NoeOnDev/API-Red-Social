@@ -1,5 +1,6 @@
 import express from 'express';
 import connect from './database/connection.js';
+import indexRoutes from './routes/indexRoutes.js';
 
 async function startServer() {
 
@@ -10,6 +11,7 @@ async function startServer() {
         console.clear();
         await connect();
         app.use(express.json());
+        app.use('/api', indexRoutes);
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
     } catch (error) {
         console.error(error);

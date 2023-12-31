@@ -27,8 +27,10 @@ User.init({
         allowNull: false,
         unique: true,
         validate: {
-            isEmail: true,
-            msg: "Must be a valid email address"
+            isEmail: {
+                args: true,
+                msg: "Must be a valid email address"
+            }
         }
     },
     password: {
