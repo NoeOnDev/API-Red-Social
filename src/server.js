@@ -1,13 +1,16 @@
 import express from 'express';
+import connect from './database/connection.js';
 
-import { config } from 'dotenv';
+async function startServer() {
+    const app = express();
+    const PORT = process.env.PORT || 5050;
+    try {
+        console.clear();
+        await connect();
+        app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-config();
-
-const { PORT } = process.env;
-const app = express();
-
-app.listen(PORT, () => {
-    console.clear();
-    console.log(`Server listening on port ${PORT}`);
-});
+export default startServer;

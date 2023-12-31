@@ -2,10 +2,10 @@
   "name": "api",
   "version": "1.0.0",
   "description": "API de practica para mejorar con NodeJS",
-  "main": "server.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon ./src/server.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "NoeOn",
