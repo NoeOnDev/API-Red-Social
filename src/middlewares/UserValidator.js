@@ -24,17 +24,7 @@ export const registerUserValidations = [
         .trim()
         .not()
         .isEmpty()
-        .withMessage('Birthdate is required')
-        .isDate()
-        .withMessage('Please enter a valid date')
-        .custom((value) => {
-            const birthdate = new Date(value);
-            const today = new Date();
-            const twelveYearsAgo = new Date(today.getFullYear() - 12, today.getMonth(), today.getDate());
-            if (birthdate > twelveYearsAgo) {
-                throw new Error('You must be at least 12 years old to register');
-            }
-        }),
+        .withMessage('Birthdate is required'),
     body('email')
         .trim()
         .not()
@@ -55,5 +45,10 @@ export const registerUserValidations = [
         .isEmpty()
         .withMessage('Password is required')
         .isLength({ min: 8 })
-        .withMessage('Password must be at least 8 characters long'),
+        .withMessage('Password must be at least 8 characters long')
+        .matches(/^(?=.*[A-Z])(?=.*\d)/)
+        .withMessage('Password must contain at least one uppercase letter and one number')
+        .not()
+        .contains(' ')
+        .withMessage('Password must not contain spaces'),
 ]
