@@ -1,6 +1,11 @@
+import { validationResult } from 'express-validator';
 import Poster from '../models/PosterModel.js';
 
 export async function createPoster(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ message: errors.array() });
+    }
     const { title, content } = req.body;
     const userId = req.user.id;
 
