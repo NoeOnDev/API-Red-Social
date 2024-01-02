@@ -11,8 +11,8 @@ export async function createPoster(req, res) {
 
     try {
         const poster = await Poster.create({ title, content, userId });
-        res.status(201).json({ message: 'Poster creado exitosamente', poster });
+        res.status(201).json({ message: 'Poster successfully created', poster });
     } catch (error) {
-        res.status(500).json({ message: 'Hubo un error al crear el poster', error });
+        res.status(500).json({ message: 'There was an error creating the poster', error });
     }
 }
