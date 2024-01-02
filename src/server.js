@@ -8,7 +8,6 @@ async function startServer() {
     const PORT = process.env.PORT || 5050;
 
     try {
-        console.clear();
         await connect();
         app.use(express.json());
         app.use('/api', indexRoutes);
