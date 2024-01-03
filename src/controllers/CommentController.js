@@ -53,3 +53,14 @@ export async function updateComment (req, res) {
         res.status(500).json({ message: 'There was an error updating the comment', error });
     }
 }
+
+export async function deleteComment (req, res) {
+    try {
+        const comment = req.comment;
+
+        await comment.destroy();
+        res.status(200).json({ message: 'Comment successfully deleted', comment });
+    } catch (error) {
+        res.status(500).json({ message: 'There was an error deleting the comment', error });
+    }
+}
