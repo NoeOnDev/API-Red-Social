@@ -42,7 +42,7 @@ export async function getSearchedPosters (req, res) {
         const posters = await Poster.findAll({ 
             where: { 
                 title: { [Op.like]: `%${title}%` }, 
-                isPublic: false
+                isPublic: true
             } 
         });
         res.status(200).json({ posters });
