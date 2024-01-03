@@ -7,3 +7,6 @@ Poster.belongsTo(User, { foreignKey: 'userId' });
 
 Poster.hasMany(Comment, { foreignKey: 'posterId' });
 Comment.belongsTo(Poster, { foreignKey: 'posterId' });
+
+User.hasMany(Comment, { foreignKey: 'userId' });
+Comment.belongsTo(User, { foreignKey: 'userId' });
