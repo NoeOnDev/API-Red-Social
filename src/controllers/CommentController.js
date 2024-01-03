@@ -1,7 +1,12 @@
+import { validationResult } from 'express-validator';
 import Comment from '../models/CommentModel.js';
 import User from '../models/UserModel.js';
 
 export async function addCommentToPoster (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
     try {
         const { content } = req.body;
         const userId = req.user.id;
@@ -30,5 +35,25 @@ export async function getCommentsFromPoster(req, res) {
         res.status(200).json({ message: 'Comments successfully obtained', comments });
     } catch (error) {
         res.status(500).json({ message: 'There was an error obtaining the comments', error });
+    }
+}
+
+export async function updateComment (req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+        const { id } = req.params;
+        const { content } = req.body;
+        const comment = await Comment.findByPk(id);
+
+        if (!comment) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+        await comment.update({ content });
+        res.status(200).json({ message: 'Comment successfully updated', comment });
+    } catch (error) {
+        res.status(500).json({ message: 'There was an error updating the comment', error });
     }
 }
