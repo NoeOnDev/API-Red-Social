@@ -44,13 +44,9 @@ export async function updateComment (req, res) {
         return res.status(400).json({ errors: errors.array() });
     }
     try {
-        const { id } = req.params;
         const { content } = req.body;
-        const comment = await Comment.findByPk(id);
+        const comment = req.comment;
 
-        if (!comment) {
-            return res.status(404).json({ message: 'Comment not found' });
-        }
         await comment.update({ content });
         res.status(200).json({ message: 'Comment successfully updated', comment });
     } catch (error) {
