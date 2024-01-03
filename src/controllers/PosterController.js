@@ -1,4 +1,5 @@
 import { validationResult } from 'express-validator';
+import { Op } from 'sequelize';
 import Poster from '../models/PosterModel.js';
 
 export async function createPoster(req, res) {
@@ -29,6 +30,21 @@ export async function getPostersForUser (req, res) {
     try {
         const userId = req.user.id;
         const posters = await Poster.findAll({ where: { userId } });
+        res.status(200).json({ posters });
+    } catch (error) {
+        res.status(500).json({ message: 'There was an error getting the posters', error });
+    }
+}
+
+export async function getSearchedPosters (req, res) {
+    try {
+        const { title } = req.query;
+        const posters = await Poster.findAll({ 
+            where: { 
+                title: { [Op.like]: `%${title}%` }, 
+                isPublic: false
+            } 
+        });
         res.status(200).json({ posters });
     } catch (error) {
         res.status(500).json({ message: 'There was an error getting the posters', error });
