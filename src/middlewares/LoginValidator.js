@@ -19,7 +19,7 @@ export const loginUserValidator = [
             }
             return true;
         }),
-        body('password')
+    body('password')
         .trim()
         .not()
         .isEmpty()
@@ -36,7 +36,7 @@ export const loginUserValidator = [
                 const token = jwt.sign(
                     { id: user.id, email: user.email },
                     process.env.JWT_SECRET,
-                    { expiresIn: '1h' }
+                    { expiresIn: '2h' }
                 );
                 req.token = token;
             }

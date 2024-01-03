@@ -11,7 +11,7 @@ async function startServer() {
         console.clear();
         await connect();
         app.use(express.json());
-        app.use('/api', indexRoutes);
+        app.use(indexRoutes);
         app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
     } catch (error) {
         console.error(error);

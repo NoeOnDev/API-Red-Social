@@ -7,4 +7,3 @@ const router = Router();
 router.post('/register', registerUserValidations ,registerUser);
 
 export default router;
-
