@@ -16,6 +16,11 @@ Like.init({
     posterId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'like'
     }
 }, {
     sequelize,
