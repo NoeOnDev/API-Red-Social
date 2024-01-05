@@ -15,4 +15,10 @@ export const createPosterValidations = [
         .withMessage('Content is required')
         .isLength({ min: 10 })
         .withMessage('Content must be at least 10 characters long'),
+    body('isPublic')
+        .not()
+        .isEmpty()
+        .withMessage('isPublic is required')
+        .isBoolean()
+        .withMessage('isPublic must be a boolean'),
 ];
